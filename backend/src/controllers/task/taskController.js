@@ -27,7 +27,6 @@ export const createTask = asyncHandler(async(req,res)=>{
 });
 
 // get all the tasks
-//.tdtfhfhfyjfrj
 export const getTasks = asyncHandler(async(req,res)=>{
 try{
     const userId = req.user._id;
@@ -47,5 +46,23 @@ try{
 
 // get a task
 export const getTask = asyncHandler(async (req,res)=>{
+try{
+    const userId = req.user._id;
+    const {id} = req.params;
+    if(!id){
+        res.status(400).json({message:"Please provide a task id"});
+    }
+    const task = await TaskModel.findById(id);
+    if(!task){
+        res.status(400).json({message:"Task not found"});
+    }
+    if(!task.user.equals(userId)){
+        res.status(401).json({message:"Not authorized"});
+    }
+    res.status(200).json(task);
+}catch (error){
+    console.log("Error in getTask: ",error.message);
+    res.status(500).json({message:error.message});
+}
 
 });
