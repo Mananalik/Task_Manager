@@ -66,3 +66,35 @@ try{
 }
 
 });
+
+// update the task
+export const updateTask = asyncHandler(async(req,res)=>{
+try{
+    const userId = req.user._id;
+    const {id} = req.params; // task id
+    const {title,description,dueDate,priority,status,completed}=req.body;
+    if(!id){
+        res.status(400).json({message:"Please provide a task id"});
+    }
+    const task = await TaskModel.findById(id);
+    if(!task){
+        res.status(400).json({message:"Task not found!"});
+    }
+    // check if the user is the owner of the task 
+    if(!task.user.equals(userId)){
+        res.status(401).json({message:"Not authorized"});
+    }
+    // update the task with the new data if provided or keep the old data
+    task.title = title || task.title;
+    task.description = description || task.description;
+    task.dueDate = dueDate || task.dueDate;
+    task.priority = priority || task.priority;
+    task.status = status || task.status;
+    task.completed = completed || task.completed;
+    await task.save();
+    return res.status(200).json(task);
+}catch(error){
+    console.log("Error in updateTask: ",error.message);
+    res.status(500).json({message: error.message});
+}
+});
