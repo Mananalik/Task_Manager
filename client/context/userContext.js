@@ -1,6 +1,6 @@
-import React , {createContext, userEffect , userState, useContext} from 'react';
+import React , {createContext, useEffect , useState, useContext} from 'react';
 
-const UserContext = React.createContext();
+const UserContext = React.createContext();// store and provide values (like user information, authentication state, etc.) to child components.
 
 export const UserContextProvider = ({children})=>{
     return (
@@ -9,4 +9,8 @@ export const UserContextProvider = ({children})=>{
             </UserContext.Provider>
         
     );
+};
+
+export const useUserContext=()=>{
+    return useContext(UserContext)
 };
