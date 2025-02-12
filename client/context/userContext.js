@@ -36,6 +36,8 @@ export const UserContextProvider = ({ children }) => {
 
     try {
       const res = await axios.post(`${serverUrl}/api/v1/register`, userState);
+      // const res = await axios.post("http://localhost:8000/api/v1/register", userState);
+
       console.log("User registered successfully", res.data);
       toast.success("User registered successfully");
 
@@ -50,7 +52,7 @@ export const UserContextProvider = ({ children }) => {
       router.push("/login");
     } catch (error) {
       console.log("Error registering user", error);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message );
     }
   };
 
@@ -84,7 +86,7 @@ export const UserContextProvider = ({ children }) => {
       router.push("/");
     } catch (error) {
       console.log("Error logging in user", error);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message );
     }
   };
 
@@ -111,70 +113,88 @@ export const UserContextProvider = ({ children }) => {
   };
 
   // logout user
-   const logoutUser = async()=>{
-    try{
-        const res = await axios.get(`${serverUrl}/api/v1/logout`,{
-             withCredentials: true,// send cookies to the sever
-        });
-        toast.success("User logged out sucessfully");
+  const logoutUser = async () => {
+    try {
+      const res = await axios.get(`${serverUrl}/api/v1/logout`, {
+        withCredentials: true, // send cookies to the server
+      });
 
-        // redirect to login page
-        router.push("/login");
-    }catch(error){
-        console.log("Error logging out user",error);
-        toast.error(error.response.data.message);
-    }
-   };
-   // get user details
-   const getUser = async()=>{
-    setLoading(true);
-    try{
-        const res = await axios.get(`${serverUrl}/api/v1/user`,{
-            withCredentials:true, // send cookies to the user
-        });
-        setUser((prevState)=>{
-            return {
-                ...prevState, // Copy old values: name, email, role
-                ...res.data, // Overwrite the changed values
-            };
-        });
-        setLoading(false);
-    }catch(error){
-        console.log("Error getting user details", error);
-        setLoading(false);
-        toast.error(error.response.data.message);  
-    }
-   };
+      toast.success("User logged out successfully");
 
-   // update the user details
-   const updateUser = async(e,data)=>{
-    e.preventDefault();
+      // redirect to login page
+      router.push("/login");
+    } catch (error) {
+      console.log("Error logging out user", error);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  // get user details
+  const getUser = async () => {
     setLoading(true);
-    try{
-        const res = await axios.patch(`${serverUrl}/api/v1/user`, data, {
-            withCredentials: true, // send cookies to the server
-          });
-        // update the user state
+    try {
+      const res = await axios.get(`${serverUrl}/api/v1/user`, {
+        withCredentials: true, // send cookies to the server
+      });
+
       setUser((prevState) => {
         return {
           ...prevState,
           ...res.data,
         };
       });
-    toast.success('User updated successfully');
-    setLoading(false);
-    }catch(error){
-        console.log("Error updating user details", error);
-        setLoading(false);
-        toast.error(error.response.data.message);
+
+      setLoading(false);
+    } catch (error) {
+      console.log("Error getting user details", error);
+      setLoading(false);
+      toast.error(error.response.data.message);
     }
-   };
-   // email verification
+  };
+
+  // update user details
+  const updateUser = async (e, data) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await axios.patch(`${serverUrl}/api/v1/user`, data, {
+        withCredentials: true, // send cookies to the server
+      });
+
+      // update the user state
+      setUser((prevState) => {
+        return {
+          ...prevState,
+          ...res.data,
+        };
+      });
+
+      toast.success("User updated successfully");
+
+      setLoading(false);
+    } catch (error) {
+      console.log("Error updating user details", error);
+      setLoading(false);
+      toast.error(error.response.data.message);
+    }
+  };
+   // dynamic form handler
+   const handleUserInput = (name) => (e) => {
+    const value = e.target.value;
+
+    setUserState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
     return (
         <UserContext.Provider value={{
+            loginUser,
             registerUser,
             userState,
+            handleUserInput
         }}>
             {children}
             </UserContext.Provider>
