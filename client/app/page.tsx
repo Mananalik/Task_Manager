@@ -1,7 +1,9 @@
 "use client";
 import {useUserContext} from "@/context/userContext.js";
+import useRedirect from "@/hooks/useUserRedirect";
 import {useState} from "react";
 export default function Home() {
+    useRedirect("/login");
   const{
        logoutUser,
        user , 
@@ -50,8 +52,39 @@ export default function Home() {
       <p  className="text-[#999] text-[2rem]">{bio}</p>
       <h1>
         <button 
-        onClick={myToggle}></button>
+        onClick={myToggle}
+        className="px-4 py-2 bg-[#2ECC71] text-white rounded-md"
+        >
+          Update Bio
+        </button>
       </h1>
+      {isOpen && (
+        <form className="mt-4 px-8 py-4 max-w-[520px] w-full rounded-md">
+          <div className="flex flex-col">
+             <label htmlFor="bio" className="mb-1 text-[#999]">
+                   Bio
+             </label>
+             <textarea
+                name="bio"
+                defaultValue={bio}
+                className="px-4 py-3 border-[2px] rounded-md outline-[#2ECC71] text-gray-800"
+                onChange={(e) => handleUserInput("bio")(e)}>
+
+             </textarea>
+          </div>
+          <button
+              type="submit"
+              onClick={(e) => updateUser(e, { bio: userState.bio })}
+              className="mt-4 px-4 py-2  bg-blue-500 text-white rounded-md">
+                Update Bio
+              </button>
+        </form>
+      )}
     </section>
+    <div className="mt-4 flex gap-8">
+        <div className="flex-1">
+        {/* <ChangePasswordForm /> */}
+        </div>
+    </div>
   </main>
 }
