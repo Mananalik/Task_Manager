@@ -1,5 +1,8 @@
 import crypto from "node:crypto";
+
 const hashToken = (token) => {
-    return crypto.createHash("sha256").update(token.toString()).digest("hex");
+  // hash the token using sha256
+  return crypto.createHash("sha256").update(token.toString()).digest("hex");
 };
+
 export default hashToken;

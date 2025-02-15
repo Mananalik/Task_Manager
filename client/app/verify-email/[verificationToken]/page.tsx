@@ -8,9 +8,10 @@ interface Props {
   };
 }
 
-function page({ params }: Props) {
-  const { verificationToken } = params;
-
+function page({ params }: { params: Promise<{ verificationToken: string }> }) {
+    const resolvedParams = React.use(params);
+    const verificationToken = resolvedParams.verificationToken;
+  
   const { verifyUser } = useUserContext();
 
   return (

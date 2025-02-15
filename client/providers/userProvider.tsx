@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
-import { UserContextProvider } from "../context/userContext.js";
+import { UserContextProvider } from "../context/userContext";
 
-interface Props{
-    children: React.ReactNode;
+interface Props {
+  children: React.ReactNode;
 }
-function UserProvider ({children}:Props){
-    return <UserContextProvider>
-        {children}
-    </ UserContextProvider>
-};
+
+function UserProvider({ children }: Props) {
+  return <UserContextProvider>{children}</UserContextProvider>;
+}
 
 export default UserProvider;

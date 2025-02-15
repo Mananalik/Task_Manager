@@ -1,9 +1,12 @@
-import React from 'react'
-import ForgotPassWordForm from '../components/auth/ForgotPasswordForm/ForgotPasswordForm'
-export default function page() {
+import React from "react";
+import ForgotPasswordForm from "../Components/auth/ForgotPasswordForm/ForgotPasswordForm";
+
+function page() {
   return (
     <div className="auth-page w-full h-full flex justify-center items-center">
-        <ForgotPassWordForm/>
+      <ForgotPasswordForm />
     </div>
   );
 }
+
+export default page;
