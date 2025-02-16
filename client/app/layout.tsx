@@ -3,7 +3,12 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import UserProvider from "@/providers/UserProvider";
 import { Toaster } from "react-hot-toast";
-
+import MiniSidebar from "./components/auth/MiniSidebar/MiniSidebar";
+import Header from "./components/auth/Header/Header";
+import MainContentLayout from "@/providers/MainContentLayout";
+import SideBarProvider from "@/providers/SideBarProvider";
+import MainLayout from "@/providers/MainLayout";
+  
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,8 +33,20 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+      
+        <UserProvider>
         <Toaster position="top-center" />
-        <UserProvider>{children}</UserProvider>
+        <div className="h-full flex overflow-hidden">
+             <MiniSidebar/>
+             <div className="flex-1 flex flex-col">
+              <Header/>
+              <MainContentLayout>
+                <MainLayout>{children}</MainLayout>
+                <SideBarProvider/>
+              </MainContentLayout>
+             </div>
+        </div>
+       {children} </UserProvider>
       </body>
     </html>
   );
