@@ -1,5 +1,6 @@
 import React from "react";
-import RegisterForm from "../Components/auth/RegisterForm/RegisterForm";
+import RegisterForm from "../components/auth/RegisterForm/RegisterForm";
+import MiniSidebar from "../components/auth/MiniSidebar/MiniSidebar";
 
 function page() {
   return (
