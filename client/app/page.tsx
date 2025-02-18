@@ -3,6 +3,7 @@ import { useUserContext } from "@/context/userContext";
 import useRedirect from "@/hooks/useUserRedirect";
 import { useState } from "react";
 import ChangePasswordForm from "./components/auth/changePasswordForm/ChangePasswordForm";
+import { useTasks } from "@/context/taskContext";
 
 export default function Home() {
   useRedirect("/login");
@@ -25,7 +26,8 @@ export default function Home() {
   // const myToggle = () => {
   //   setIsOpen(!isOpen);
   // };
-
+  const tasks = useTasks();
+  console.log(tasks);
   return (
     // <main className="py-[2rem] mx-[10rem]">
     //   <header className="flex justify-between">
