@@ -2,8 +2,6 @@
 import { useEffect } from "react";
 import {useTasks} from "@/context/taskContext";
 import useRedirect from "@/hooks/useUserRedirect";
-import { useState } from "react";
-import ChangePasswordForm from "./components/auth/changePasswordForm/ChangePasswordForm";
 import Filters from "./components/auth/Filters/Filters";
 import {Task} from "@/utils/types";
 import { filteredTasks } from "@/utils/utilities";

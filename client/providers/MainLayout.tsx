@@ -1,13 +1,20 @@
-import React from 'react'
+"use client";
+import Modal from "@/app/components/auth/Modal/Modal";
+import { useTasks } from "@/context/taskContext";
+import React from "react";
 
-interface MainLayoutProps{
-    children: React.ReactNode;
+interface MainLayoutProps {
+  children: React.ReactNode;
 }
-function MainLayout({children}:MainLayoutProps) {
+
+function MainLayout({ children }: MainLayoutProps) {
+  const { isEditing, profileModal } = useTasks();
   return (
     <div className="main-layout flex-1 bg-[#EDEDED] border-2 border-white rounded-[1.5rem] overflow-auto">
-      {children}</div>
-  )
+      {isEditing && <Modal />}
+      {children}
+    </div>
+  );
 }
 
-export default MainLayout
+export default MainLayout;
