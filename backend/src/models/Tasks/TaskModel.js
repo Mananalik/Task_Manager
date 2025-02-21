@@ -1,22 +1,25 @@
 import mongoose from "mongoose";
+
 const TaskSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            required: [true,"Please provide a tittle"],
-            unique: true,
+            required: [true, "Please provide a title"],  // Fixed typo
+            trim: true,  // Ensures no spaces-only titles
+            unique: false,  // Remove `unique: true` if not needed
         },
-        description:{
+        description: {
             type: String,
-            default: "No description"
+            default: "No description",
+            trim: true,
         },
-        dueDate:{
+        dueDate: {
             type: Date,
-            default: Date.now(),
+            default: Date.now,  // Fix: Use `Date.now` without parentheses
         },
-        status:{
+        status: {
             type: String,
-            enum:["active","inactive"],
+            enum: ["active", "inactive"],
             default: "active",
         },
         completed: {
@@ -25,15 +28,16 @@ const TaskSchema = new mongoose.Schema(
         },
         priority: {
             type: String,
-            enum: ["low","medium","high"],
+            enum: ["low", "medium", "high"],
         },
-        user:{
+        user: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
             required: true,
         },
     },
-    {timestamps: true}
+    { timestamps: true }
 );
-const TaskModel = mongoose.model("Task",TaskSchema);
+
+const TaskModel = mongoose.model("Task", TaskSchema);
 export default TaskModel;
