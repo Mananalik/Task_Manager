@@ -4,8 +4,10 @@ import { useUserContext } from '@/context/userContext';
 import {github , moon, profile} from "@/utils/Icons"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTasks } from '@/context/taskContext';
 function Header() {
   const {user} = useUserContext();
+  const {openModalForAdd, activeTasks} = useTasks();
   const {name} = user;
   const userId = user._id;
   const router = useRouter();
@@ -24,7 +26,7 @@ function Header() {
             <>
             You have{" "}
             <span className="font-bold text-[#3aafae]">
-              5
+              {activeTasks.length}
             </span>&nbsp;active tasks
             </>
           ):(
@@ -38,7 +40,7 @@ function Header() {
         hover:bg-[#00A1F1] hover:text-white transition-all duration-200 ease-in-out"
         onClick={()=>{
           if(userId){
-            // openModelForAdd();
+            openModalForAdd();
           }else{
             router.push("/login");
           }

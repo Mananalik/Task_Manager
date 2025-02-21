@@ -1,9 +1,24 @@
-import React from "react";
+import React,{useEffect} from "react";
 import RegisterForm from "../components/auth/RegisterForm/RegisterForm";
-import MiniSidebar from "../components/auth/MiniSidebar/MiniSidebar";
+import { useUserContext } from "@/context/userContext";
+import { useRouter } from "next/router";
+
 
 function page() {
-  return (
+  const {user} = useUserContext();
+  const router = useRouter();
+
+  useEffect(()=>{
+    // redirect to home page if user is already logged in
+    if(user && user._id){
+      router.push("/");
+    }
+  },[user,router])
+  // return null or a loading spinner / indicatpr
+  if (user && user._id){
+    return null;
+  }
+    return (
     <div className="auth-page w-full h-full flex justify-center items-center">
       <RegisterForm />
     </div>

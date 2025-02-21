@@ -1,5 +1,6 @@
 "use client"
 import {useTasks} from "@/context/taskContext";
+import useDetectOutside from "@/hooks/useDetectOutside";
 import React, {useEffect} from "react";
 
 function Modal(){
@@ -14,6 +15,21 @@ function Modal(){
         updateTask,
     } = useTasks();
     const ref = React.useRef(null);
+    // use the hook to detect clicks outside the modal
+    useDetectOutside({
+        ref,
+        callback:()=>{
+            if (isEditing){
+                closeModal(); // close the modal if it is in add/edit mode
+            }
+        },
+    });
+    useEffect(()=>{
+        if(modalMode==="edit" && activeTask){
+            handleInput("setTask")(activeTask);
+        }
+    },[modalMode,activeTask]);
+
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if(modalMode==="edit"){

@@ -61,7 +61,7 @@ function MiniSidebar() {
       </div>
     </div>
     
-  )
+  );
 }
 
 export default MiniSidebar
