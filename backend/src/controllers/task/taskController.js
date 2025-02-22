@@ -11,8 +11,8 @@ export const createTask = asyncHandler(async(req,res)=>{
           res.status(400).json({message:"Description is requird"});
         }
         const task = new TaskModel({
-            title,
-            description,
+            title: title.trim(),
+            description: description.trim(),
             dueDate,
             priority,
             status,
@@ -22,6 +22,9 @@ export const createTask = asyncHandler(async(req,res)=>{
         res.status(201).json(task);
     } catch(error){
         console.log("Error in createTask: ",error.message);
+        if (error.code === 11000) { 
+          return res.status(400).json({ message: "Task title must be unique" });
+      }
         res.status(500).json({message: error.message});
     }
 });

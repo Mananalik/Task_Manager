@@ -4,7 +4,7 @@ import { useUserContext } from "./userContext";
 import toast from "react-hot-toast";
 import axios from "axios";
 const TasksContext = createContext();
-const serverUrl = "http://localhost:8000";
+const serverUrl = "http://localhost:8000/api/v1";
 export const TasksProvider = ({children})=>{
     const userId = useUserContext().user._id;
 
@@ -112,12 +112,9 @@ export const TasksProvider = ({children})=>{
 
     const handleInput = (name)=>(e)=>{
         if(name=="setTask"){
-            setTask(e.target.value);
+            setTask(e);
         }else{
-            setTask((prevTask)=>({
-                ...prevTask,
-                [name]:e.target.value,
-            }));
+            setTask({ ...task, [name]: e.target.value });
         }
     };
 

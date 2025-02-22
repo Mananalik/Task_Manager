@@ -70,9 +70,9 @@ function RegisterForm() {
             className="absolute p-1 right-4 top-[43%] text-[22px] text-[#999] opacity-45"
           >
             {showPassword ? (
-              <i className="fas fa-eye-slash" onClick={togglePassword}></i>
-            ) : (
               <i className="fas fa-eye" onClick={togglePassword}></i>
+            ) : (
+              <i className="fas fa-eye-slash" onClick={togglePassword}></i>
             )}
           </button>
         </div>
