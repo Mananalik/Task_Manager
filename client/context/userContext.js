@@ -118,6 +118,7 @@ export const UserContextProvider = ({ children }) => {
       });
 
       toast.success("User logged out successfully");
+      setUser({});
 
       // redirect to login page
       router.push("/login");

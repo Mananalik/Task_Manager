@@ -9,10 +9,9 @@ interface Props {
   };
 }
 
-function page({ params }: { params: Promise<{ resetToken: string }> }) {
+function page({ params }:Props) {
   const { resetPassword } = useUserContext();
-  const resolvedParams = React.use(params);
-  const resetToken = resolvedParams.resetToken;
+  const resetToken = params.resetToken;
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -68,9 +67,9 @@ function page({ params }: { params: Promise<{ resetToken: string }> }) {
               type="button"
             >
               {showPassword ? (
-                <i className="fas fa-eye-slash"></i>
-              ) : (
                 <i className="fas fa-eye"></i>
+              ) : (
+                <i className="fas fa-eye-slash"></i>
               )}
             </button>
           </div>
@@ -93,9 +92,9 @@ function page({ params }: { params: Promise<{ resetToken: string }> }) {
               type="button"
             >
               {showPassword ? (
-                <i className="fas fa-eye-slash"></i>
-              ) : (
                 <i className="fas fa-eye"></i>
+              ) : (
+                <i className="fas fa-eye-slash"></i>
               )}
             </button>
           </div>

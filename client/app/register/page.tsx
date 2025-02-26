@@ -1,7 +1,8 @@
+"use client"
 import React,{useEffect} from "react";
 import RegisterForm from "../components/auth/RegisterForm/RegisterForm";
 import { useUserContext } from "@/context/userContext";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 
 function page() {
