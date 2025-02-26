@@ -4,7 +4,7 @@ import { useUserContext } from "./userContext";
 import toast from "react-hot-toast";
 import axios from "axios";
 const TasksContext = createContext();
-const serverUrl = "http://localhost:8000/api/v1";
+const serverUrl = "https://task-manager-1-az84.onrender.com/api/v1";
 export const TasksProvider = ({children})=>{
     const userId = useUserContext().user._id;
 
