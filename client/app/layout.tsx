@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import UserProvider from "../providers/UserProvider";
+import UserProvider from "@/providers/UserProvider";
 import { Toaster } from "react-hot-toast";
 import MiniSidebar from "./components/auth/MiniSidebar/MiniSidebar";
 import Header from "./components/auth/Header/Header";
