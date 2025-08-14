@@ -96,9 +96,9 @@ Task-Manager/
 ---
 
 ## 🧑‍💻 Author
-**Saumil Singh Rana**  
-[GitHub](https://github.com/iamsam15)  
-[LinkedIn](https://www.linkedin.com/in/saumilsinghrana)
+**Manan Malik**  
+[GitHub](https://github.com/Mananalik)  
+[LinkedIn](https://www.linkedin.com/in/manan-malik-705318256/)
 
 ---
 
